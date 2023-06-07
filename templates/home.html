@@ -1,0 +1,46 @@
+{% extends 'base.html' %} {% block content %}
+<h1 class="text-3xl font-extrabold mb-3">Chit Chat Using Flask</h1>
+<p class="text-base font-bold mb-10">By Kelompok 2 - TJW A</p>
+<form
+  method="POST"
+  class="buttons flex flex-col justify-center items-center w-full"
+>
+  <p class="text-xl font-bold mb-2">Name</p>
+  <input
+    type="text"
+    placeholder="Name..."
+    name="name"
+    value="{{name}}"
+    class="px-4 py-1 rounded-md bg-gray-200 border-yellow-400 border-4 mb-4"
+  />
+  <p class="text-xl font-bold mb-2">Room Code</p>
+  <input
+    type="text"
+    placeholder="Room Code"
+    name="code"
+    value="{{code}}"
+    class="px-4 py-1 rounded-md bg-gray-200 border-yellow-400 border-4 mb-5"
+  />
+  <div class="flex flex-row gap-7 justify-center w-full">
+    <button
+      type="submit"
+      name="join"
+      class="text-sm font-bold text p-1 bg-yellow-400 w-24 rounded-lg"
+    >
+      Join Room
+    </button>
+    <button
+      type="submit"
+      name="create"
+      class="text-sm font-bold text p-1 bg-red-600 w-24 rounded-lg"
+    >
+      Create a Room
+    </button>
+  </div>
+  {% if error %}
+  <ul class="mt-8 text-base font-bold bg-red-600 p-1.5 px-4 rounded-lg text-white">
+    <li>{{error}}</li>
+  </ul>
+  {% endif %}
+</form>
+{% endblock %}

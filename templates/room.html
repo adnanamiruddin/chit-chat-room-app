@@ -1,0 +1,83 @@
+{% extends 'base.html' %} {% block content %}
+<h1 class="text-5xl font-extrabold mb-2">Chit Chat</h1>
+<h2 class="text-2xl font-bold mb-4">'{{code}}' Room</h2>
+
+<div
+  class="bg-gray-300 border-black border-4 rounded-lg h-4/6 w-5/6 flex flex-col items-stretch"
+>
+  <div class="overflow-scroll flex-1 w-full" id="messages"></div>
+  <div
+    class="p-2 flex gap-3 flex justify-center items-center mt-1 bg-stone-300"
+  >
+    <input
+      type="text"
+      rows="3"
+      placeholder="Message"
+      name="message"
+      id="message"
+      class="py-1 px-2 rounded-md border-yellow-500 border-2 w-52"
+    />
+    <button
+      type="button"
+      name="send"
+      id="send-btn"
+      onClick="sendMessage()"
+      class="bg-yellow-500 py-1 px-2 rounded-lg text-base font-bold"
+    >
+      Send
+    </button>
+  </div>
+</div>
+<script type="text/javascript">
+  const socketio = io();
+
+  const messages = document.getElementById("messages");
+
+  const createMessage = (name, msg) => {
+    const content = `
+    <div class="flex flex-row justify-between items-center px-2 pt-4 overflow-auto text-sm">
+      <span>
+        <strong>${name}</strong>: ${msg}
+      </span>
+      <span class="text-xs text-gray-500 w-1/6">
+        ${new Date().toLocaleString()}
+      </span>
+    </div>
+  `;
+    messages.innerHTML += content;
+    scrollToBottom();
+  };
+
+  socketio.on("message", (data) => {
+    createMessage(data.name, data.message);
+  });
+
+  const sendMessage = () => {
+    const message = document.getElementById("message");
+    if (message.value === "") return;
+    socketio.emit("message", { data: message.value });
+    message.value = "";
+    setTimeout(scrollToBottom, 100); // Delay to ensure message is rendered before scrolling
+  };
+
+  const scrollToBottom = () => {
+    messages.scrollTo({ top: messages.scrollHeight, behavior: "smooth" });
+  };
+
+  window.addEventListener("load", scrollToBottom);
+
+  messages.addEventListener("scroll", () => {
+    const scrollOffset = messages.scrollHeight - messages.scrollTop;
+    const containerHeight = messages.clientHeight;
+    const scrollDifference = scrollOffset - containerHeight;
+    if (scrollDifference < 5) {
+      scrollToBottom();
+    }
+  });
+</script>
+
+{% for msg in messages %}
+<script type="text/javascript">
+  createMessage("{{msg.name}}", "{{msg.message}}");
+</script>
+{% endfor %} {% endblock %}

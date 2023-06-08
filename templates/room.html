@@ -43,9 +43,14 @@
   const createMessage = (name, msg) => {
     const content = `
     <div class="flex flex-row justify-between items-center px-2 pt-4 overflow-hidden text-sm">
-      <span class="w-4/6  break-words md:w-9/12">
-        <strong>${name}</strong>: ${msg}
-      </span>
+      <div class="w-4/6  break-words md:w-9/12">
+        <div style="font-size: 15px;">
+          <strong>${name}</strong>
+        </div>
+        <div style="font-size: 20px;">
+          ${msg}
+        </div>
+      </div>
       <span class="text-xs text-gray-500 w-1/6">
         ${new Date().toLocaleString()}
       </span>

@@ -1,21 +1,9 @@
 {% extends 'base.html' %} {% block content %}
-
-<div>
-  <form
-    method="POST"
-    class="buttons flex flex-col justify-center items-center w-full"
-  >
-    <div class="flex flex-row gap-7 justify-center w-full">
-      <button
-        type="submit"
-        name="back"
-        class="bg-yellow-500 py-1 px-2 rounded-lg text-base font-bold"
-      >
-        Back
-      </button>
-    </div>
-  </form>
-</div>
+<a
+  href="/"
+  class="absolute top-5 start-5 bg-red-500 py-1 px-2 rounded-lg text-base pb-0"
+  ><ion-icon name="arrow-back-outline"></ion-icon>
+</a>
 
 <h1 class="text-5xl font-extrabold mb-2">Chit Chat</h1>
 <h2 class="text-2xl font-bold mb-4">'{{code}}' Room</h2>
@@ -26,7 +14,7 @@
   <div class="overflow-scroll flex-1 w-full" id="messages"></div>
   <form
     onSubmit="sendMessage(event)"
-    class="p-2 flex gap-3 flex justify-center items-center mt-1 bg-stone-300"
+    class="p-2 flex gap-3 flex justify-center items-center mt-1 bg-stone-300 overflow-auto"
   >
     <input
       type="text"
@@ -46,7 +34,6 @@
       Send
     </button>
   </form>
-  <a href="/" class="mt-4 text-blue-500 underline">Back to Home</a>
 </div>
 <script type="text/javascript">
   const socketio = io();
@@ -55,7 +42,7 @@
 
   const createMessage = (name, msg) => {
     const content = `
-    <div class="flex flex-row justify-between items-center px-2 pt-4 overflow-auto text-sm">
+    <div class="flex flex-row justify-between items-center px-2 pt-4 overflow-hidden text-sm">
       <span class="w-4/6  break-words md:w-9/12">
         <strong>${name}</strong>: ${msg}
       </span>

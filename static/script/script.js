@@ -14,7 +14,7 @@ const createMessage = (name, msg) => {
         </div>
       </div>
       <span class="text-xs text-gray-500 w-1/6 text-end">
-        ${new Date().toLocaleString()}
+        ${new Date().getHours().toString().padStart(2, '0')}:${new Date().getMinutes().toString().padStart(2, '0')}
       </span>
     </div>
   `;

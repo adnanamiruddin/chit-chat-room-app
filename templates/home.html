@@ -1,10 +1,7 @@
 {% extends 'base.html' %} {% block content %}
 <h1 class="text-3xl font-extrabold mb-3">Chit Chat Using Flask</h1>
 <p class="text-base font-bold mb-10">By Kelompok 2 - TJW A</p>
-<form
-  method="POST"
-  class="buttons flex flex-col justify-center items-center w-full"
->
+<form method="POST" class="flex flex-col justify-center items-center w-full">
   <p class="text-xl font-bold mb-2">Name</p>
   <input
     type="text"
@@ -38,7 +35,9 @@
     </button>
   </div>
   {% if error %}
-  <ul class="mt-8 text-base font-bold bg-red-600 p-1.5 px-4 rounded-lg text-white">
+  <ul
+    class="mt-8 text-base font-bold bg-red-600 p-1.5 px-4 rounded-lg text-white"
+  >
     <li>{{error}}</li>
   </ul>
   {% endif %}

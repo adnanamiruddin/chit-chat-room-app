@@ -4,7 +4,7 @@ const messages = document.getElementById("messages");
 
 const createMessage = (name, msg) => {
   const content = `
-    <div class="flex flex-row justify-between items-center px-2 pt-4 overflow-hidden text-sm md:px-6">
+    <div class="flex flex-row justify-between items-center px-2 pt-4 overflow-hidden text-sm md:px-4">
       <div class="w-4/6  break-words md:w-9/12">
         <div class="text-sm">
           <strong>${name}</strong>
@@ -40,12 +40,3 @@ const scrollToBottom = () => {
 };
 
 window.addEventListener("load", scrollToBottom);
-
-// messages.addEventListener("scroll", () => {
-//   const scrollOffset = messages.scrollHeight - messages.scrollTop;
-//   const containerHeight = messages.clientHeight;
-//   const scrollDifference = scrollOffset - containerHeight;
-//   if (scrollDifference < 5) {
-//     scrollToBottom();
-//   }
-// });
